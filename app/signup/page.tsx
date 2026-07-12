@@ -3,8 +3,10 @@
 import { useActionState } from "react";
 import { signup, type AuthState } from "@/app/actions/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [state, formAction, isPending] = useActionState<AuthState, FormData>(
     signup,
     {}
@@ -66,6 +68,14 @@ export default function SignupPage() {
           </div>
 
           <div className="bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-sm border border-outline-variant/30">
+            <button
+              onClick={() => router.back()}
+              type="button"
+              className="flex items-center gap-1.5 text-sm font-semibold text-secondary hover:text-primary transition-colors cursor-pointer mb-6"
+            >
+              <span className="material-symbols-outlined text-lg">arrow_back</span>
+              ย้อนกลับ
+            </button>
             <div className="mb-8">
               <h1 className="font-serif text-3xl font-bold text-on-surface">
                 สมัครสมาชิกใหม่
