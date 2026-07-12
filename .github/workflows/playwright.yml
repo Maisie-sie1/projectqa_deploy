@@ -10,6 +10,9 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
     steps:
     - uses: actions/checkout@v4
 
@@ -26,9 +29,6 @@ jobs:
       run: npx playwright install --with-deps chromium
 
     - name: Run Playwright tests
-      env:
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
       run: npx playwright test tests/api.spec.ts
 
     - name: Upload Playwright Report
